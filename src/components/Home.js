@@ -14,7 +14,6 @@ const Home = () => {
     "11:00 AM",
     "1:00 PM",
     "2:00 PM",
-    
   ]);
 
   const handleDateSelect = (date) => {
@@ -37,6 +36,16 @@ const Home = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
+
+    const name = e.target.elements.name.value.trim();
+    const email = e.target.elements.email.value.trim();
+    const mobile = e.target.elements.mobile.value.trim();
+
+    if (name === "" || email === "" || mobile === "") {
+      window.alert("Please fill in all fields");
+      return;
+    }
+
     const selectedDateISO = selectedDate.toISOString();
     setBookedSlots({
       ...bookedSlots,
@@ -96,20 +105,24 @@ const Home = () => {
             onSubmit={handleFormSubmit}
             className="flex flex-col items-center"
           >
+            {/* Input fields for booking details */}
             <input
               type="text"
               placeholder="Enter your FullName"
               className="mb-4 p-2 border rounded"
+              name="name"
             />
             <input
               type="email"
               placeholder="Enter your Email ID"
               className="mb-4 p-2 border rounded"
+              name="email"
             />
             <input
               type="number"
               placeholder="Enter your Mobile No."
               className="mb-4 p-2 border rounded"
+              name="mobile"
             />
             <button
               type="submit"
